@@ -74,7 +74,7 @@ const handleSubmit = async(e) =>{
   const messageDiv = document.getElementById(uniqueId);
   loader(messageDiv)
 
-  const response = await fetch("http://localhost:5000",{
+  const response = await fetch("https://ai-app-6ubu.onrender.com",{
     method:"post",
     headers:{
       "Content-Type":"application/json",

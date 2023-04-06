@@ -3,7 +3,8 @@ import user from "./assets/user.svg";
 
 const form = document.querySelector("form");
 const chat_container = document.querySelector("#chat_container");
-
+var textArea = document.querySelector("textarea");
+var textAreaValue = textArea.value;
 let loadInterval;
 
 function loader(element){
@@ -14,7 +15,7 @@ function loader(element){
   },300)
 
   if(element.textContent === "...."){
-    element.textContent = "";
+    element.textContext = "";
   }
 }
 
@@ -58,8 +59,13 @@ const chatStripe = (isAi,value,uniqueId)=>{
   )
 }
 
-const handleSubmit = async(e) =>{
+const handleSubmit = async(e)=>{
   e.preventDefault();
+
+  if(textArea.value === "" || textArea.value === " "){
+    alert("Please Enter Something...")
+    return;
+  }
 
   const data = new FormData(form);
   chat_container.innerHTML += chatStripe(false,data.get("prompt"));
@@ -101,8 +107,14 @@ const handleSubmit = async(e) =>{
 }
 
 form.addEventListener("submit",handleSubmit);
+
+
 form.addEventListener("keyup",(e)=>{
   if(e.keyCode === 13){
+    if(textArea.value === ""){
+      alert("Please Enter Something...")
+      return;
+    }
     handleSubmit(e)
   }
 })
